@@ -23,7 +23,7 @@ class TomeApp extends StatelessWidget {
             brightness: Brightness.light,
           ),
           useMaterial3: true,
-          fontFamily: 'Roboto',
+          fontFamily: 'Urbanist',
         ),
         darkTheme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
@@ -31,7 +31,7 @@ class TomeApp extends StatelessWidget {
             brightness: Brightness.dark,
           ),
           useMaterial3: true,
-          fontFamily: 'Roboto',
+          fontFamily: 'Urbanist',
         ),
         themeMode: ThemeMode.system,
         home: const HomeScreen(),
