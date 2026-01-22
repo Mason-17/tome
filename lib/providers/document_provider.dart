@@ -75,9 +75,9 @@ class DocumentProvider extends ChangeNotifier {
   Future<bool> openRecentFile(MarkdownDocument recentDoc) async {
     try {
       if (recentDoc.filePath != null) {
-        final file = await _fileService.openFile();
-        if (file != null) {
-          _currentDocument = file;
+        final doc = await _fileService.loadFileFromPath(recentDoc.filePath!);
+        if (doc != null) {
+          _currentDocument = doc;
           notifyListeners();
           return true;
         }

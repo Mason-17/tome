@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'providers/document_provider.dart';
 import 'screens/home_screen.dart';
 
@@ -23,7 +24,7 @@ class TomeApp extends StatelessWidget {
             brightness: Brightness.light,
           ),
           useMaterial3: true,
-          fontFamily: 'Urbanist',
+          fontFamily: GoogleFonts.urbanist().fontFamily,
         ),
         darkTheme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
@@ -31,7 +32,7 @@ class TomeApp extends StatelessWidget {
             brightness: Brightness.dark,
           ),
           useMaterial3: true,
-          fontFamily: 'Urbanist',
+          fontFamily: GoogleFonts.urbanist().fontFamily,
         ),
         themeMode: ThemeMode.system,
         home: const HomeScreen(),

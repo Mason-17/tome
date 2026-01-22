@@ -10,6 +10,40 @@ class FileService {
   static const String _recentFilesKey = 'recent_files';
   static const int _maxRecentFiles = 10;
 
+  /// Load a file from a specific path
+  Future<MarkdownDocument?> loadFileFromPath(String filePath) async {
+    try {
+      final file = File(filePath);
+      
+      // Check if file exists
+      if (!await file.exists()) {
+        print('File not found: $filePath');
+        return null;
+      }
+      
+      final content = await file.readAsString();
+      final fileName = filePath.split('/').last.split('\\').last;
+      final title = fileName.replaceAll(RegExp(r'\.(md|markdown|txt)$'), '');
+
+      final now = DateTime.now();
+      final doc = MarkdownDocument(
+        id: IdGenerator.generate(),
+        title: title,
+        content: content,
+        filePath: filePath,
+        createdAt: now,
+        updatedAt: now,
+        isSaved: true,
+      );
+
+      await _addToRecentFiles(doc);
+      return doc;
+    } catch (e) {
+      print('Error loading file from path: $e');
+      return null;
+    }
+  }
+
   /// Open file picker and load a markdown file
   Future<MarkdownDocument?> openFile() async {
     try {
@@ -19,25 +53,7 @@ class FileService {
       );
 
       if (result != null && result.files.single.path != null) {
-        final filePath = result.files.single.path!;
-        final file = File(filePath);
-        final content = await file.readAsString();
-        final fileName = filePath.split('/').last.split('\\').last;
-        final title = fileName.replaceAll(RegExp(r'\.(md|markdown|txt)$'), '');
-
-        final now = DateTime.now();
-        final doc = MarkdownDocument(
-          id: IdGenerator.generate(),
-          title: title,
-          content: content,
-          filePath: filePath,
-          createdAt: now,
-          updatedAt: now,
-          isSaved: true,
-        );
-
-        await _addToRecentFiles(doc);
-        return doc;
+        return await loadFileFromPath(result.files.single.path!);
       }
     } catch (e) {
       print('Error opening file: $e');
