@@ -24,7 +24,7 @@ class TomeApp extends StatelessWidget {
             brightness: Brightness.light,
           ),
           useMaterial3: true,
-          fontFamily: GoogleFonts.urbanist().fontFamily,
+          fontFamily: GoogleFonts.ubuntu().fontFamily,
         ),
         darkTheme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
@@ -32,7 +32,7 @@ class TomeApp extends StatelessWidget {
             brightness: Brightness.dark,
           ),
           useMaterial3: true,
-          fontFamily: GoogleFonts.urbanist().fontFamily,
+          fontFamily: GoogleFonts.ubuntu().fontFamily,
         ),
         themeMode: ThemeMode.system,
         home: const HomeScreen(),
